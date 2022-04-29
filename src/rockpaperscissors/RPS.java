@@ -11,7 +11,7 @@ import java.util.Random;
 
 
 public class RPS extends javax.swing.JFrame {
-
+    Game rpsGame = new Game();
     /**
      * Creates new form RPS
      */
@@ -30,372 +30,250 @@ public class RPS extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         mainMenu = new javax.swing.JPanel();
-        rpsTitle = new javax.swing.JLabel();
         playOneBtn = new javax.swing.JButton();
         playFiveBtn = new javax.swing.JButton();
         playInfinBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         gameUI = new javax.swing.JPanel();
-        scoreBoard = new javax.swing.JPanel();
-        yourScoreHeader = new javax.swing.JLabel();
-        compScoreHeader = new javax.swing.JLabel();
-        compScoreBox = new javax.swing.JLabel();
-        yourScoreBox = new javax.swing.JLabel();
-        faces = new javax.swing.JPanel();
-        yourFace = new javax.swing.JLabel();
-        compFace = new javax.swing.JLabel();
+        playerScoreHeader = new javax.swing.JLabel();
+        computerScoreBox = new javax.swing.JLabel();
+        playerScoreBox = new javax.swing.JLabel();
         gameStatus = new javax.swing.JPanel();
+        roundBox = new javax.swing.JLabel();
+        computerFace = new javax.swing.JLabel();
+        playerFace = new javax.swing.JLabel();
         winnerBox = new javax.swing.JLabel();
         statusBox = new javax.swing.JLabel();
-        directionBox = new javax.swing.JLabel();
-        mmBtn = new javax.swing.JButton();
         playAgain = new javax.swing.JButton();
         endGameBtn = new javax.swing.JButton();
+        mmBtn = new javax.swing.JButton();
         handSelection = new javax.swing.JPanel();
         scissorBtn = new javax.swing.JButton();
         paperBtn = new javax.swing.JButton();
         rockBtn = new javax.swing.JButton();
-        yourHandHeader = new javax.swing.JLabel();
-        compHandHeader = new javax.swing.JLabel();
         compHandBox = new javax.swing.JLabel();
-        roundBox = new javax.swing.JLabel();
+        directionBox = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Rock, Paper, Scissors");
-        setBackground(new java.awt.Color(255, 250, 125));
+        setBackground(new java.awt.Color(51, 51, 51));
         setForeground(new java.awt.Color(255, 255, 153));
+        setMaximumSize(new java.awt.Dimension(1000, 800));
+        setMinimumSize(new java.awt.Dimension(1000, 800));
         setPreferredSize(new java.awt.Dimension(1000, 800));
+        setResizable(false);
 
         jPanel1.setLayout(new javax.swing.OverlayLayout(jPanel1));
 
         mainMenu.setPreferredSize(new java.awt.Dimension(700, 700));
+        mainMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        rpsTitle.setFont(new java.awt.Font("Marker Felt", 1, 48)); // NOI18N
-        rpsTitle.setText("Rock, Paper, Scissors");
-
+        playOneBtn.setBackground(new java.awt.Color(0, 255, 255));
         playOneBtn.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        playOneBtn.setForeground(new java.awt.Color(51, 51, 51));
         playOneBtn.setText("Play 1 Game");
         playOneBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playOneBtnActionPerformed(evt);
             }
         });
+        mainMenu.add(playOneBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, 200, 45));
 
+        playFiveBtn.setBackground(new java.awt.Color(255, 250, 138));
         playFiveBtn.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        playFiveBtn.setForeground(new java.awt.Color(51, 51, 51));
         playFiveBtn.setText("Play 5 Games");
         playFiveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playFiveBtnActionPerformed(evt);
             }
         });
+        mainMenu.add(playFiveBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 415, 200, 45));
 
+        playInfinBtn.setBackground(new java.awt.Color(255, 109, 97));
         playInfinBtn.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        playInfinBtn.setForeground(new java.awt.Color(51, 51, 51));
         playInfinBtn.setText("Play ∞ Games");
         playInfinBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playInfinBtnActionPerformed(evt);
             }
         });
+        mainMenu.add(playInfinBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 520, 200, 45));
 
-        javax.swing.GroupLayout mainMenuLayout = new javax.swing.GroupLayout(mainMenu);
-        mainMenu.setLayout(mainMenuLayout);
-        mainMenuLayout.setHorizontalGroup(
-            mainMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainMenuLayout.createSequentialGroup()
-                .addContainerGap(314, Short.MAX_VALUE)
-                .addGroup(mainMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainMenuLayout.createSequentialGroup()
-                        .addComponent(rpsTitle)
-                        .addGap(311, 311, 311))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainMenuLayout.createSequentialGroup()
-                        .addGroup(mainMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(playFiveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(playOneBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(playInfinBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(395, 395, 395))))
-        );
-        mainMenuLayout.setVerticalGroup(
-            mainMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainMenuLayout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(rpsTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84)
-                .addComponent(playOneBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(playFiveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(playInfinBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(345, Short.MAX_VALUE))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/MainMenu.png"))); // NOI18N
+        mainMenu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 800));
 
         jPanel1.add(mainMenu);
 
         gameUI.setFocusable(false);
+        gameUI.setMaximumSize(new java.awt.Dimension(1000, 800));
+        gameUI.setMinimumSize(new java.awt.Dimension(1000, 800));
         gameUI.setOpaque(false);
+        gameUI.setPreferredSize(new java.awt.Dimension(1000, 800));
+        gameUI.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        yourScoreHeader.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        yourScoreHeader.setText("You");
-        yourScoreHeader.setFocusable(false);
+        playerScoreHeader.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        playerScoreHeader.setForeground(new java.awt.Color(0, 255, 255));
+        playerScoreHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        playerScoreHeader.setText("You");
+        playerScoreHeader.setFocusable(false);
+        gameUI.add(playerScoreHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 44, 90, -1));
 
-        compScoreHeader.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        compScoreHeader.setText("Computer");
+        computerScoreBox.setFont(new java.awt.Font("Arial", 1, 55)); // NOI18N
+        computerScoreBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        computerScoreBox.setText("0");
+        gameUI.add(computerScoreBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, 100, -1));
 
-        compScoreBox.setFont(new java.awt.Font("Helvetica Neue", 0, 36)); // NOI18N
-        compScoreBox.setText("0");
+        playerScoreBox.setFont(new java.awt.Font("Arial", 1, 55)); // NOI18N
+        playerScoreBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        playerScoreBox.setText("0");
+        gameUI.add(playerScoreBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 100, -1));
 
-        yourScoreBox.setFont(new java.awt.Font("Helvetica Neue", 0, 36)); // NOI18N
-        yourScoreBox.setText("0");
-
-        javax.swing.GroupLayout scoreBoardLayout = new javax.swing.GroupLayout(scoreBoard);
-        scoreBoard.setLayout(scoreBoardLayout);
-        scoreBoardLayout.setHorizontalGroup(
-            scoreBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(scoreBoardLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(scoreBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(scoreBoardLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(yourScoreBox))
-                    .addComponent(yourScoreHeader))
-                .addGroup(scoreBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(scoreBoardLayout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(compScoreHeader))
-                    .addGroup(scoreBoardLayout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addComponent(compScoreBox)))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-        scoreBoardLayout.setVerticalGroup(
-            scoreBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(scoreBoardLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(scoreBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(yourScoreHeader)
-                    .addComponent(compScoreHeader))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(scoreBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(yourScoreBox)
-                    .addComponent(compScoreBox))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        yourFace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/normalFace.jpg"))); // NOI18N
-        yourFace.setOpaque(true);
-
-        compFace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/normalFace.jpg"))); // NOI18N
-        compFace.setOpaque(true);
-
+        gameStatus.setMaximumSize(new java.awt.Dimension(1000, 450));
+        gameStatus.setMinimumSize(new java.awt.Dimension(1000, 450));
         gameStatus.setOpaque(false);
+        gameStatus.setPreferredSize(new java.awt.Dimension(1000, 450));
+        gameStatus.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        winnerBox.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        roundBox.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        roundBox.setForeground(new java.awt.Color(255, 255, 255));
+        roundBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        roundBox.setText(" Round 1");
+        roundBox.setPreferredSize(new java.awt.Dimension(1000, 59));
+        gameStatus.add(roundBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+        roundBox.getAccessibleContext().setAccessibleParent(gameUI);
+
+        computerFace.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        computerFace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/RPS_Comp_Start.png"))); // NOI18N
+        computerFace.setMaximumSize(new java.awt.Dimension(350, 350));
+        computerFace.setMinimumSize(new java.awt.Dimension(350, 350));
+        computerFace.setPreferredSize(new java.awt.Dimension(350, 350));
+        gameStatus.add(computerFace, new org.netbeans.lib.awtextra.AbsoluteConstraints(625, 95, -1, -1));
+
+        playerFace.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        playerFace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/RPS_Player_Start.png"))); // NOI18N
+        playerFace.setPreferredSize(new java.awt.Dimension(300, 350));
+        gameStatus.add(playerFace, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
+
+        winnerBox.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         winnerBox.setForeground(new java.awt.Color(51, 204, 0));
         winnerBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        winnerBox.setText("Winner Box");
+        gameStatus.add(winnerBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 200, 70));
+        winnerBox.getAccessibleContext().setAccessibleParent(gameUI);
 
-        statusBox.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-        statusBox.setForeground(new java.awt.Color(51, 51, 51));
+        statusBox.setFont(new java.awt.Font("Arial", 0, 32)); // NOI18N
+        statusBox.setForeground(new java.awt.Color(255, 255, 255));
         statusBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        statusBox.setText("Status Box");
         statusBox.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        gameStatus.add(statusBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, 200, -1));
+        statusBox.getAccessibleContext().setAccessibleParent(gameUI);
 
-        directionBox.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        directionBox.setForeground(new java.awt.Color(102, 102, 102));
-        directionBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        mmBtn.setText("Main Menu");
-        mmBtn.setContentAreaFilled(false);
-        mmBtn.setDefaultCapable(false);
-        mmBtn.setEnabled(false);
-        mmBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mmBtnActionPerformed(evt);
-            }
-        });
-
+        playAgain.setBackground(new java.awt.Color(51, 51, 51));
+        playAgain.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        playAgain.setForeground(new java.awt.Color(51, 255, 0));
         playAgain.setText("Play Again");
-        playAgain.setContentAreaFilled(false);
+        playAgain.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0)));
         playAgain.setDefaultCapable(false);
-        playAgain.setEnabled(false);
         playAgain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playAgainActionPerformed(evt);
             }
         });
+        gameStatus.add(playAgain, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 361, 160, 40));
 
+        endGameBtn.setBackground(new java.awt.Color(51, 51, 51));
+        endGameBtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        endGameBtn.setForeground(new java.awt.Color(51, 255, 0));
         endGameBtn.setText("End Game");
-        endGameBtn.setEnabled(false);
+        endGameBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0)));
+        endGameBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        endGameBtn.setOpaque(true);
         endGameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 endGameBtnActionPerformed(evt);
             }
         });
+        gameStatus.add(endGameBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 313, 160, 40));
 
-        javax.swing.GroupLayout gameStatusLayout = new javax.swing.GroupLayout(gameStatus);
-        gameStatus.setLayout(gameStatusLayout);
-        gameStatusLayout.setHorizontalGroup(
-            gameStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(winnerBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(statusBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(gameStatusLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(gameStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(directionBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(gameStatusLayout.createSequentialGroup()
-                        .addComponent(mmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                        .addComponent(playAgain, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(gameStatusLayout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(endGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        gameStatusLayout.setVerticalGroup(
-            gameStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gameStatusLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(winnerBox, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(statusBox, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(gameStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(playAgain, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(directionBox, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(endGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
+        mmBtn.setBackground(new java.awt.Color(51, 51, 51));
+        mmBtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        mmBtn.setForeground(new java.awt.Color(51, 255, 0));
+        mmBtn.setText("Main Menu");
+        mmBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0)));
+        mmBtn.setDefaultCapable(false);
+        mmBtn.setOpaque(true);
+        mmBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mmBtnActionPerformed(evt);
+            }
+        });
+        gameStatus.add(mmBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 410, 160, 40));
 
-        javax.swing.GroupLayout facesLayout = new javax.swing.GroupLayout(faces);
-        faces.setLayout(facesLayout);
-        facesLayout.setHorizontalGroup(
-            facesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(facesLayout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(yourFace)
-                .addGap(18, 18, 18)
-                .addComponent(gameStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(compFace)
-                .addGap(137, 137, 137))
-        );
-        facesLayout.setVerticalGroup(
-            facesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, facesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(facesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(gameStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(compFace)
-                    .addComponent(yourFace))
-                .addGap(16, 16, 16))
-        );
+        gameUI.add(gameStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 115, -1, -1));
 
+        handSelection.setMaximumSize(new java.awt.Dimension(1000, 220));
+        handSelection.setMinimumSize(new java.awt.Dimension(1000, 220));
+        handSelection.setOpaque(false);
+        handSelection.setPreferredSize(new java.awt.Dimension(1000, 220));
+        handSelection.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        scissorBtn.setBackground(new java.awt.Color(51, 51, 51));
+        scissorBtn.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        scissorBtn.setForeground(new java.awt.Color(0, 255, 255));
         scissorBtn.setText("Scissors");
+        scissorBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255)));
         scissorBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 scissorBtnActionPerformed(evt);
             }
         });
+        handSelection.add(scissorBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 126, 30));
 
+        paperBtn.setBackground(new java.awt.Color(51, 51, 51));
+        paperBtn.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        paperBtn.setForeground(new java.awt.Color(0, 255, 255));
         paperBtn.setText("Paper");
+        paperBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255)));
         paperBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 paperBtnActionPerformed(evt);
             }
         });
+        handSelection.add(paperBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 126, 30));
 
+        rockBtn.setBackground(new java.awt.Color(51, 51, 51));
+        rockBtn.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        rockBtn.setForeground(new java.awt.Color(0, 255, 255));
         rockBtn.setText("Rock");
+        rockBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255)));
         rockBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rockBtnActionPerformed(evt);
             }
         });
+        handSelection.add(rockBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 126, 30));
 
-        yourHandHeader.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        yourHandHeader.setText("Choose your Hand:");
-
-        compHandHeader.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        compHandHeader.setText("Computer's Hand:");
-
-        compHandBox.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        compHandBox.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        compHandBox.setForeground(new java.awt.Color(255, 109, 97));
         compHandBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         compHandBox.setText("???");
+        handSelection.add(compHandBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(744, 90, 120, 40));
 
-        javax.swing.GroupLayout handSelectionLayout = new javax.swing.GroupLayout(handSelection);
-        handSelection.setLayout(handSelectionLayout);
-        handSelectionLayout.setHorizontalGroup(
-            handSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(handSelectionLayout.createSequentialGroup()
-                .addGap(193, 193, 193)
-                .addGroup(handSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(paperBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scissorBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rockBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(compHandBox, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(186, 186, 186))
-            .addGroup(handSelectionLayout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addComponent(yourHandHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(compHandHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130))
-        );
-        handSelectionLayout.setVerticalGroup(
-            handSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, handSelectionLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(handSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(yourHandHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(compHandHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(rockBtn)
-                .addGroup(handSelectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(handSelectionLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(paperBtn))
-                    .addGroup(handSelectionLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(compHandBox)))
-                .addGap(18, 18, 18)
-                .addComponent(scissorBtn)
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
+        directionBox.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        directionBox.setForeground(new java.awt.Color(255, 250, 138));
+        directionBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        directionBox.setText("Direction Box");
+        handSelection.add(directionBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 320, -1));
+        directionBox.getAccessibleContext().setAccessibleParent(gameUI);
 
-        roundBox.setFont(new java.awt.Font("Helvetica Neue", 1, 48)); // NOI18N
-        roundBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        roundBox.setText(" Round 1");
+        gameUI.add(handSelection, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, 1000, 220));
 
-        javax.swing.GroupLayout gameUILayout = new javax.swing.GroupLayout(gameUI);
-        gameUI.setLayout(gameUILayout);
-        gameUILayout.setHorizontalGroup(
-            gameUILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gameUILayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(gameUILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(faces, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(handSelection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(gameUILayout.createSequentialGroup()
-                .addGap(352, 352, 352)
-                .addGroup(gameUILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(scoreBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(roundBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        gameUILayout.setVerticalGroup(
-            gameUILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gameUILayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(scoreBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(roundBox)
-                .addGap(43, 43, 43)
-                .addComponent(faces, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(handSelection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/GameUI.png"))); // NOI18N
+        gameUI.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 800));
 
         jPanel1.add(gameUI);
 
@@ -418,26 +296,20 @@ public class RPS extends javax.swing.JFrame {
     ------------------------------------------------------------------------------------- */
     private void playOneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playOneBtnActionPerformed
         // TODO add your handling code here:
-        mode = 0;
-        newGame(mode);
-        //game oneGame = new game();
-        //oneGame.setMode(mode);
+        rpsGame.setGameRounds(1);
+        updateUI();
     }//GEN-LAST:event_playOneBtnActionPerformed
 
     private void playInfinBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playInfinBtnActionPerformed
         // TODO add your handling code here:
-        mode = 1;
-        newGame(mode);
-        //game oneGame = new game();
-        //oneGame.setMode(mode);
+        rpsGame.setInfinite();
+        updateUI();
     }//GEN-LAST:event_playInfinBtnActionPerformed
 
     private void playFiveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playFiveBtnActionPerformed
         // TODO add your handling code here:
-        mode = 2;
-        newGame(mode);
-        //game oneGame = new game();
-        //oneGame.setMode(mode);
+        rpsGame.setGameRounds(5);
+        updateUI();
     }//GEN-LAST:event_playFiveBtnActionPerformed
 
     /* 
@@ -445,20 +317,26 @@ public class RPS extends javax.swing.JFrame {
     -------------------------------------------------------------------------------------- */
     private void rockBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rockBtnActionPerformed
         // TODO add your handling code here:
-        buttonName = "Rock";
-        choiceSelectActions(buttonName);
+        hand = "Rock";
+        rpsGame.setHand(hand);
+        rpsGame.playRound();
+        updateUI();
     }//GEN-LAST:event_rockBtnActionPerformed
 
     private void paperBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paperBtnActionPerformed
         // TODO add your handling code here:
-        buttonName = "Paper";
-        choiceSelectActions(buttonName);
+        hand = "Paper";
+        rpsGame.setHand(hand);
+        rpsGame.playRound();
+        updateUI();
     }//GEN-LAST:event_paperBtnActionPerformed
 
     private void scissorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scissorBtnActionPerformed
         // TODO add your handling code here:
-        buttonName = "Scissors";
-        choiceSelectActions(buttonName);
+        hand = "Scissors";
+        rpsGame.setHand(hand);
+        rpsGame.playRound();
+        updateUI();
     }//GEN-LAST:event_scissorBtnActionPerformed
 
     /*
@@ -467,18 +345,20 @@ public class RPS extends javax.swing.JFrame {
     private void mmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmBtnActionPerformed
         // TODO add your handling code here:
         toggleMainMenu(show);
-        toggleGameUI(hide);
+        toggleGameActive(hide);
+        toggleGameOver(hide);
     }//GEN-LAST:event_mmBtnActionPerformed
 
     private void playAgainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playAgainActionPerformed
         // TODO add your handling code here:
-        toggleGameOverBtns(hide);
-        newGame(mode);
+        rpsGame.playAgain();
+        updateUI();
     }//GEN-LAST:event_playAgainActionPerformed
 
     private void endGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endGameBtnActionPerformed
         // TODO add your handling code here:
-        endGame();
+        rpsGame.endGame();
+        updateUI();
     }//GEN-LAST:event_endGameBtnActionPerformed
 
     /**
@@ -493,285 +373,74 @@ public class RPS extends javax.swing.JFrame {
             }
         });
     }
-    
-    public void choiceSelectActions(String btnName){
-        roundPlayed = true;
-        roundMsg = "Round " + roundCount;
-        yourChoice = btnName;
-        computerChoice = compChooser();
-        roundWinner = getWinner(yourChoice, computerChoice);
-        updateScore(roundWinner);
-        statusMessage = getStatus(roundWinner);
-        directionMsg = nextStep(roundsRemaining, roundWinner);
-        
-        updateUI(computerChoice, roundWinner, roundMsg, statusMessage, directionMsg);
-        if (roundsRemaining < 1){
-            endGame();
-        }
-    }
-    
-    public String compChooser() {
-        String choiceValue = "";
-        Random rand = new Random();
-        int randNum = rand.nextInt(3);
-        switch (randNum) {
-            case 0:
-                choiceValue = "Rock";
-                break;
-            case 1:
-                choiceValue = "Paper";
-                break;
-            case 2:
-                choiceValue = "Scissors";
-                break;
-            default:
-                choiceValue = "None";
-        }
-        return choiceValue;
-    }
-    
-    public String getWinner(String player, String computer){
-        String winner = "";
-        
-        if (player == computer){
-            winner = "Tie";
-        } else if (player == "Rock"){
-            if (computer == "Paper") {
-                winner = "Computer";
-            } else if (computer == "Scissors") {
-                winner = "You";
-            }
-        } else if (player == "Paper") {
-            if (computer == "Rock") {
-                winner = "You";
-            } else if (computer == "Scissors") {
-                winner = "Computer";
-            }
-        } else if (player == "Scissors") {
-            if (computer == "Rock"){
-                winner = "Computer";
-            } else if (computer == "Paper") {
-                winner = "You";
-            }  
-        }
-        
-        return winner;
-    }
-    
-    public void updateScore(String rndWinner){
-        if (rndWinner == "Computer"){
-            computerScore += 1;
-        } else if (rndWinner == "You") {
-            playerScore += 1;
-        }
-    }
-    
-    public String getStatus(String rndWinner){
-        String statusMsg;
-        if (rndWinner == "Tie") {
-            statusMsg = "replay ";
-        } else if (rndWinner == "You") {
-            statusMsg = "won ";
-        } else {
-            statusMsg = "wins ";
-        }
-        return statusMsg;
-    }
-    
-    public String nextStep(int rounds, String winner){
-        String message = "";
-        if (rounds >= 1) {
-            if (infinite == false) {
-                roundsRemaining--;
-            }
-            
-            if (winner == "Tie"){
-                roundsRemaining++;
-            } else {
-                roundCount++;
-            }
 
-            message = "Choose again to continue";
-        } else {
-            message = "";
-        }
+    public void updateUI(){
+        roundBox.setText(rpsGame.getRound());
+        playerScoreBox.setText(String.valueOf(rpsGame.getPlayerScore()));
+        computerScoreBox.setText(String.valueOf(rpsGame.getComputerScore()));
+        compHandBox.setText(rpsGame.getComputerHand());
+        winnerBox.setText(rpsGame.getWinner());
+        statusBox.setText(rpsGame.getStatusMsg());
+        directionBox.setText(rpsGame.getDirectionMsg());
         
-        return message;
+        gameOver = rpsGame.getGameOver();
+        if (gameOver == true){
+            toggleGameOver(show);
+        } else {
+            toggleMainMenu(hide);
+            toggleGameOver(hide);
+            toggleGameActive(show);
+        }
     }
     
-    public void updateUI(String compHand, String winner, String round, String status, String direction){
-        yourScoreBox.setText(String.valueOf(playerScore));
-        compScoreBox.setText(String.valueOf(computerScore));
-        compHandBox.setText(compHand);
-        winnerBox.setText(winner);
-        roundBox.setText(round);
-        if (roundPlayed == true){
-            statusBox.setText(status + round);
-        } else {
-            statusBox.setText(status);
-        }
-        directionBox.setText(direction);
-    }
-    
-    
-    
-    public void endGame(){
-        String winMsg;
-        if (playerScore > computerScore) {
-            winMsg = "You Won!";
-        } else {
-            winMsg = "You Lost";
-        }
-        roundMsg = "Game Over";
-        statusMessage = "";
-        
-        
-        updateUI("", winMsg, roundMsg, "", "");
-        
-        toggleHandSelection(hide);
-        toggleChoiceBtns(disable);
-        toggleGameOverBtns(show);
-        toggleEndBtn(hide);
-        toggleStatusBox(hide);
-        toggleDirecBox(hide);
-        toggleWinnerBox(show);
-    }
-    
-    
-    public void toggleGameUI(boolean state){
-        gameUI.setOpaque(state);
+    public void toggleGameActive(boolean state){
         gameUI.setVisible(state);
+        gameStatus.setVisible(state);
     }
     
     
     public void toggleMainMenu(boolean state){
+        // Changes to the specified state
         mainMenu.setVisible(state);
         mainMenu.setOpaque(state);
+        playOneBtn.setEnabled(state);
+        playFiveBtn.setEnabled(state);
+        playInfinBtn.setEnabled(state);
     }
     
-    
-    public void toggleHandSelection(boolean state) {
-        handSelection.setVisible(state);
-        handSelection.setEnabled(state);
-        handSelection.setOpaque(state);
-    }
- 
-    
-    public void toggleChoiceBtns(boolean state){
-        rockBtn.setEnabled(state);
-        paperBtn.setEnabled(state);
-        scissorBtn.setEnabled(state);
-    }
-    
-    
-    public void toggleGameOverBtns(boolean state){
+    public void toggleGameOver(boolean state) {
         playAgain.setVisible(state);
         playAgain.setEnabled(state);
         playAgain.setOpaque(state);
         mmBtn.setVisible(state);
         mmBtn.setEnabled(state);
         mmBtn.setOpaque(state);
+        
+        endGameBtn.setVisible(!state);
+        endGameBtn.setEnabled(!state);
+        endGameBtn.setOpaque(!state);
+        handSelection.setVisible(!state);
+        handSelection.setEnabled(!state);
     }
     
-    
-    public void toggleEndBtn(boolean state){
-        endGameBtn.setVisible(state);
-        endGameBtn.setEnabled(state);
-        endGameBtn.setOpaque(state);
-    }
-    
-    
-    public void toggleStatusBox(boolean state){
-        winnerBox.setVisible(state);
-        winnerBox.setOpaque(state);
-        statusBox.setVisible(state);
-        statusBox.setOpaque(state);
-    }
-
-    
-    public void toggleDirecBox(boolean state){
-        directionBox.setVisible(state);
-        directionBox.setOpaque(state);
-    }
-    
-    public void toggleWinnerBox(boolean state){
-        winnerBox.setVisible(state);
-        winnerBox.setOpaque(state);
-    }
-    
-    public void newGame(int modeSelected){
-        roundPlayed = false;
-        yourChoice = "";
-        computerChoice = "???";
-        playerScore = 0;
-        computerScore = 0;
-        roundCount = 1;
-        roundMsg = "Round " + roundCount;
-        statusMessage = "";
-        directionMsg = "Choose Rock, Paper, or Scissors";
-        roundWinner = "";
-
-        toggleMainMenu(hide);
-        toggleGameUI(show);
-        toggleChoiceBtns(enable);
-        toggleGameOverBtns(hide);
-        toggleHandSelection(show);
-        toggleStatusBox(show);
-        toggleDirecBox(show);
-
-        switch(modeSelected){
-            case 0:
-                roundsRemaining = 1;
-                toggleEndBtn(hide);
-                break;
-            case 1:
-                roundsRemaining = 1;
-                infinite = true;
-                toggleEndBtn(show);
-                break;
-            case 2:
-                roundsRemaining = 5;
-                toggleEndBtn(hide);
-                break;
-            default:
-                roundsRemaining = 1;
-                toggleEndBtn(hide);
-        }
-        updateUI(computerChoice, roundWinner, roundMsg, statusMessage, directionMsg);
-    }
-    
-    String yourChoice;
-    String computerChoice;
-    String statusMessage;
-    String directionMsg;
-    String roundMsg;
-    String buttonName;
-    int mode;
-    int roundsRemaining;
-    boolean infinite = false;
+    boolean gameOver;
     boolean hide = false;
     boolean show = true;
     boolean disable = false;
     boolean enable = true;
-    boolean roundPlayed;
-    int playerScore = 0;
-    int computerScore = 0;
-    int roundCount = 1;
-    String roundWinner;
-
+    String hand;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel compFace;
     private javax.swing.JLabel compHandBox;
-    private javax.swing.JLabel compHandHeader;
-    private javax.swing.JLabel compScoreBox;
-    private javax.swing.JLabel compScoreHeader;
+    private javax.swing.JLabel computerFace;
+    private javax.swing.JLabel computerScoreBox;
     private javax.swing.JLabel directionBox;
     private javax.swing.JButton endGameBtn;
-    private javax.swing.JPanel faces;
     private javax.swing.JPanel gameStatus;
     private javax.swing.JPanel gameUI;
     private javax.swing.JPanel handSelection;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainMenu;
     private javax.swing.JButton mmBtn;
@@ -780,17 +449,14 @@ public class RPS extends javax.swing.JFrame {
     private javax.swing.JButton playFiveBtn;
     private javax.swing.JButton playInfinBtn;
     private javax.swing.JButton playOneBtn;
+    private javax.swing.JLabel playerFace;
+    private javax.swing.JLabel playerScoreBox;
+    private javax.swing.JLabel playerScoreHeader;
     private javax.swing.JButton rockBtn;
     private javax.swing.JLabel roundBox;
-    private javax.swing.JLabel rpsTitle;
     private javax.swing.JButton scissorBtn;
-    private javax.swing.JPanel scoreBoard;
     private javax.swing.JLabel statusBox;
     private javax.swing.JLabel winnerBox;
-    private javax.swing.JLabel yourFace;
-    private javax.swing.JLabel yourHandHeader;
-    private javax.swing.JLabel yourScoreBox;
-    private javax.swing.JLabel yourScoreHeader;
     // End of variables declaration//GEN-END:variables
 }
 
