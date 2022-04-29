@@ -96,7 +96,7 @@ public class Game {
                 statusMsg = "wins round " + roundCounter;
                 directionMsg = "Make another selection to keep playing";
                 computerScore++;
-            } else if(computerHand == "Scissors") {
+            } else if (computerHand == "Scissors") {
                 winner = "You";
                 statusMsg = "won round " + roundCounter;
                 directionMsg = "Make another selection to keep playing";
@@ -167,8 +167,13 @@ public class Game {
                 roundCounter += 1;
                 roundMsg = "Round " + roundCounter;
             }
-        } else {
-            endGame();
+        } else if (roundCounter > gameRounds) {
+            gameOver = true;
+            if (winner != "Tie") {
+                roundMsg = "Round " + roundCounter;
+                roundCounter += 1;
+                endGame();
+            }
         }
     }
     
