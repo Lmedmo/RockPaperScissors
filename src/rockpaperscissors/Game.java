@@ -28,7 +28,7 @@ public class Game {
     private String roundMsg;
     private String playerName;
     
-    
+
     public void setGameRounds(int oneOrFive) {
         gameRounds = oneOrFive;
         infiniteRounds = false;
@@ -55,7 +55,10 @@ public class Game {
 
     public void playRound() {
         setComputerHand();
-        determineWinner();
+        setWinner();
+        setStatusMsg();
+        setRoundMsg();
+        setDirectionMsg();
         isGameOver();
     }
 
@@ -85,45 +88,31 @@ public class Game {
         return computerHand;
     }
     
-    private void determineWinner() {
+    private void setWinner() {
         if (playerHand == computerHand){
             winner = "Tie";
-            statusMsg = "Replay round " + roundCounter;
-            directionMsg = "Make another selection to keep playing";
         } else if (playerHand == "Rock"){
             if (computerHand == "Paper") {
                 winner = "Computer";
-                statusMsg = "wins round " + roundCounter;
-                directionMsg = "Make another selection to keep playing";
                 computerScore++;
             } else if (computerHand == "Scissors") {
                 winner = "You";
-                statusMsg = "won round " + roundCounter;
-                directionMsg = "Make another selection to keep playing";
                 playerScore++;
             }
         } else if (playerHand == "Paper") {
             if (computerHand == "Rock") {
                 winner = "You";
-                statusMsg = "won round " + roundCounter;
-                directionMsg = "Make another selection to keep playing";
                 playerScore++;
             } else if (computerHand == "Scissors") {
                 winner = "Computer";
-                statusMsg = "wins round " + roundCounter;
-                directionMsg = "Make another selection to keep playing";
                 computerScore++;
             }
         } else if (playerHand == "Scissors") {
             if (computerHand == "Rock"){
                 winner = "Computer";
-                statusMsg = "wins round " + roundCounter;
-                directionMsg = "Make another selection to keep playing";
                 computerScore++;
             } else if (computerHand == "Paper") {
                 winner = "You";
-                statusMsg = "won round " + roundCounter;
-                directionMsg = "Make another selection to keep playing";
                 playerScore++;
             }  
         }
@@ -133,12 +122,39 @@ public class Game {
         return winner;
     }
     
-    public String getRound() {
+    public void setRoundMsg() {
+        if (winner != "Tie") {
+            roundCounter += 1;
+            roundMsg = "Round " + roundCounter;
+        } else {
+            roundMsg = "Round " + roundCounter;
+        }
+    }
+    
+    public String getRoundMsg() {
         return roundMsg;
     }
-        
+    
+    public void setStatusMsg() {
+        if (winner == "Tie") {
+            statusMsg = "Replay round " + roundCounter;
+        } else if (winner == "You"){
+            statusMsg = "won round " + roundCounter;
+        } else if (winner == "Computer") {
+            statusMsg = "wins round " + roundCounter;
+        }
+    }
+    
     public String getStatusMsg() {
         return statusMsg;
+    }
+    
+    public void setDirectionMsg() {
+        if ((roundCounter == 1) && (winner == "")) {
+            directionMsg = "Select either Rock, Paper, or Scissors to play";
+        } else {
+            directionMsg = "Make another selection for Round " + roundCounter;
+        }
     }
     
     public String getDirectionMsg(){
@@ -156,24 +172,10 @@ public class Game {
     private void isGameOver() {
         if (infiniteRounds == true) {
             gameOver = false;
-            if (winner != "Tie") {
-                roundCounter += 1;
-                roundMsg = "Round " + roundCounter;
-            }
-            
-        } else if (roundCounter < gameRounds) {
+        } else if (roundCounter <= gameRounds) {
             gameOver = false;
-            if (winner != "Tie") {
-                roundCounter += 1;
-                roundMsg = "Round " + roundCounter;
-            }
-        } else if (roundCounter > gameRounds) {
-            gameOver = true;
-            if (winner != "Tie") {
-                roundMsg = "Round " + roundCounter;
-                roundCounter += 1;
-                endGame();
-            }
+        } else {
+            endGame();
         }
     }
     
@@ -187,7 +189,7 @@ public class Game {
         }
     }
     
-    public void endGame(){
+    public void endGame() {
         gameOver = true;
         roundMsg = "Game Over";
         statusMsg = "";
@@ -202,5 +204,4 @@ public class Game {
     public void playAgain(){
         setupNewGame();
     }
-
 }

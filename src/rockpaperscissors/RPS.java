@@ -5,7 +5,13 @@
 
 package rockpaperscissors;
 
-import java.util.Random;
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioSystem;
+import java.io.File;
+
 
 
 
@@ -28,7 +34,7 @@ public class RPS extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        RPSGame = new javax.swing.JPanel();
         mainMenu = new javax.swing.JPanel();
         playOneBtn = new javax.swing.JButton();
         playFiveBtn = new javax.swing.JButton();
@@ -38,33 +44,32 @@ public class RPS extends javax.swing.JFrame {
         playerScoreHeader = new javax.swing.JLabel();
         computerScoreBox = new javax.swing.JLabel();
         playerScoreBox = new javax.swing.JLabel();
+        endGameBtn = new javax.swing.JButton();
+        mmBtn = new javax.swing.JButton();
+        playAgain = new javax.swing.JButton();
         gameStatus = new javax.swing.JPanel();
         roundBox = new javax.swing.JLabel();
         computerFace = new javax.swing.JLabel();
         playerFace = new javax.swing.JLabel();
         winnerBox = new javax.swing.JLabel();
         statusBox = new javax.swing.JLabel();
-        playAgain = new javax.swing.JButton();
-        endGameBtn = new javax.swing.JButton();
-        mmBtn = new javax.swing.JButton();
         handSelection = new javax.swing.JPanel();
         scissorBtn = new javax.swing.JButton();
         paperBtn = new javax.swing.JButton();
         rockBtn = new javax.swing.JButton();
         compHandBox = new javax.swing.JLabel();
         directionBox = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        gameUI_img = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Rock, Paper, Scissors");
         setBackground(new java.awt.Color(51, 51, 51));
-        setForeground(new java.awt.Color(255, 255, 153));
+        setForeground(new java.awt.Color(0, 0, 0));
         setMaximumSize(new java.awt.Dimension(1000, 800));
         setMinimumSize(new java.awt.Dimension(1000, 800));
-        setPreferredSize(new java.awt.Dimension(1000, 800));
         setResizable(false);
 
-        jPanel1.setLayout(new javax.swing.OverlayLayout(jPanel1));
+        RPSGame.setLayout(new javax.swing.OverlayLayout(RPSGame));
 
         mainMenu.setPreferredSize(new java.awt.Dimension(700, 700));
         mainMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -73,6 +78,10 @@ public class RPS extends javax.swing.JFrame {
         playOneBtn.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         playOneBtn.setForeground(new java.awt.Color(51, 51, 51));
         playOneBtn.setText("Play 1 Game");
+        playOneBtn.setBorderPainted(false);
+        playOneBtn.setDefaultCapable(false);
+        playOneBtn.setFocusPainted(false);
+        playOneBtn.setOpaque(true);
         playOneBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playOneBtnActionPerformed(evt);
@@ -84,6 +93,10 @@ public class RPS extends javax.swing.JFrame {
         playFiveBtn.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         playFiveBtn.setForeground(new java.awt.Color(51, 51, 51));
         playFiveBtn.setText("Play 5 Games");
+        playFiveBtn.setBorderPainted(false);
+        playFiveBtn.setDefaultCapable(false);
+        playFiveBtn.setFocusPainted(false);
+        playFiveBtn.setOpaque(true);
         playFiveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playFiveBtnActionPerformed(evt);
@@ -95,6 +108,10 @@ public class RPS extends javax.swing.JFrame {
         playInfinBtn.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         playInfinBtn.setForeground(new java.awt.Color(51, 51, 51));
         playInfinBtn.setText("Play ∞ Games");
+        playInfinBtn.setBorderPainted(false);
+        playInfinBtn.setDefaultCapable(false);
+        playInfinBtn.setFocusPainted(false);
+        playInfinBtn.setOpaque(true);
         playInfinBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playInfinBtnActionPerformed(evt);
@@ -102,10 +119,10 @@ public class RPS extends javax.swing.JFrame {
         });
         mainMenu.add(playInfinBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 520, 200, 45));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/MainMenu.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/Images/MainMenu.png"))); // NOI18N
         mainMenu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 800));
 
-        jPanel1.add(mainMenu);
+        RPSGame.add(mainMenu);
 
         gameUI.setFocusable(false);
         gameUI.setMaximumSize(new java.awt.Dimension(1000, 800));
@@ -131,6 +148,54 @@ public class RPS extends javax.swing.JFrame {
         playerScoreBox.setText("0");
         gameUI.add(playerScoreBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 100, -1));
 
+        endGameBtn.setBackground(new java.awt.Color(51, 51, 51));
+        endGameBtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        endGameBtn.setForeground(new java.awt.Color(51, 255, 0));
+        endGameBtn.setText("End Game");
+        endGameBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0)));
+        endGameBtn.setDefaultCapable(false);
+        endGameBtn.setFocusable(false);
+        endGameBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        endGameBtn.setName(""); // NOI18N
+        endGameBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endGameBtnActionPerformed(evt);
+            }
+        });
+        gameUI.add(endGameBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 410, 160, 40));
+
+        mmBtn.setBackground(new java.awt.Color(51, 51, 51));
+        mmBtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        mmBtn.setForeground(new java.awt.Color(51, 255, 0));
+        mmBtn.setText("Main Menu");
+        mmBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0)));
+        mmBtn.setDefaultCapable(false);
+        mmBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        mmBtn.setOpaque(true);
+        mmBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mmBtnActionPerformed(evt);
+            }
+        });
+        gameUI.add(mmBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 510, 160, 40));
+        mmBtn.getAccessibleContext().setAccessibleParent(mmBtn);
+
+        playAgain.setBackground(new java.awt.Color(51, 51, 51));
+        playAgain.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        playAgain.setForeground(new java.awt.Color(51, 255, 0));
+        playAgain.setText("Play Again");
+        playAgain.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0)));
+        playAgain.setDefaultCapable(false);
+        playAgain.setFocusPainted(false);
+        playAgain.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        playAgain.setRolloverEnabled(false);
+        playAgain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playAgainActionPerformed(evt);
+            }
+        });
+        gameUI.add(playAgain, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 460, 160, 40));
+
         gameStatus.setMaximumSize(new java.awt.Dimension(1000, 450));
         gameStatus.setMinimumSize(new java.awt.Dimension(1000, 450));
         gameStatus.setOpaque(false);
@@ -146,15 +211,28 @@ public class RPS extends javax.swing.JFrame {
         roundBox.getAccessibleContext().setAccessibleParent(gameUI);
 
         computerFace.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        computerFace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/RPS_Comp_Start.png"))); // NOI18N
-        computerFace.setMaximumSize(new java.awt.Dimension(350, 350));
-        computerFace.setMinimumSize(new java.awt.Dimension(350, 350));
-        computerFace.setPreferredSize(new java.awt.Dimension(350, 350));
+        computerFace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/Images/RPS_Comp_Start.png"))); // NOI18N
+        computerFace.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                compSounds(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                compSoundStop(evt);
+            }
+        });
         gameStatus.add(computerFace, new org.netbeans.lib.awtextra.AbsoluteConstraints(625, 95, -1, -1));
 
         playerFace.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        playerFace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/RPS_Player_Start.png"))); // NOI18N
+        playerFace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/Images/RPS_Player_Start.png"))); // NOI18N
         playerFace.setPreferredSize(new java.awt.Dimension(300, 350));
+        playerFace.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                playerSound(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                playerSoundStop(evt);
+            }
+        });
         gameStatus.add(playerFace, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
 
         winnerBox.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
@@ -164,54 +242,13 @@ public class RPS extends javax.swing.JFrame {
         gameStatus.add(winnerBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 200, 70));
         winnerBox.getAccessibleContext().setAccessibleParent(gameUI);
 
-        statusBox.setFont(new java.awt.Font("Arial", 0, 32)); // NOI18N
+        statusBox.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         statusBox.setForeground(new java.awt.Color(255, 255, 255));
         statusBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         statusBox.setText("Status Box");
         statusBox.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         gameStatus.add(statusBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, 200, -1));
         statusBox.getAccessibleContext().setAccessibleParent(gameUI);
-
-        playAgain.setBackground(new java.awt.Color(51, 51, 51));
-        playAgain.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        playAgain.setForeground(new java.awt.Color(51, 255, 0));
-        playAgain.setText("Play Again");
-        playAgain.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0)));
-        playAgain.setDefaultCapable(false);
-        playAgain.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playAgainActionPerformed(evt);
-            }
-        });
-        gameStatus.add(playAgain, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 361, 160, 40));
-
-        endGameBtn.setBackground(new java.awt.Color(51, 51, 51));
-        endGameBtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        endGameBtn.setForeground(new java.awt.Color(51, 255, 0));
-        endGameBtn.setText("End Game");
-        endGameBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0)));
-        endGameBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        endGameBtn.setOpaque(true);
-        endGameBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                endGameBtnActionPerformed(evt);
-            }
-        });
-        gameStatus.add(endGameBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 313, 160, 40));
-
-        mmBtn.setBackground(new java.awt.Color(51, 51, 51));
-        mmBtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        mmBtn.setForeground(new java.awt.Color(51, 255, 0));
-        mmBtn.setText("Main Menu");
-        mmBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0), new java.awt.Color(51, 255, 0)));
-        mmBtn.setDefaultCapable(false);
-        mmBtn.setOpaque(true);
-        mmBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mmBtnActionPerformed(evt);
-            }
-        });
-        gameStatus.add(mmBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 410, 160, 40));
 
         gameUI.add(gameStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 115, -1, -1));
 
@@ -224,38 +261,50 @@ public class RPS extends javax.swing.JFrame {
         scissorBtn.setBackground(new java.awt.Color(51, 51, 51));
         scissorBtn.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         scissorBtn.setForeground(new java.awt.Color(0, 255, 255));
-        scissorBtn.setText("Scissors");
+        scissorBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/Images/Scissors.png"))); // NOI18N
         scissorBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255)));
+        scissorBtn.setBorderPainted(false);
+        scissorBtn.setContentAreaFilled(false);
+        scissorBtn.setDefaultCapable(false);
+        scissorBtn.setFocusPainted(false);
         scissorBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 scissorBtnActionPerformed(evt);
             }
         });
-        handSelection.add(scissorBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 126, 30));
+        handSelection.add(scissorBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 60, 100));
 
         paperBtn.setBackground(new java.awt.Color(51, 51, 51));
         paperBtn.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         paperBtn.setForeground(new java.awt.Color(0, 255, 255));
-        paperBtn.setText("Paper");
+        paperBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/Images/Paper.png"))); // NOI18N
         paperBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255)));
+        paperBtn.setBorderPainted(false);
+        paperBtn.setContentAreaFilled(false);
+        paperBtn.setDefaultCapable(false);
+        paperBtn.setFocusPainted(false);
         paperBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 paperBtnActionPerformed(evt);
             }
         });
-        handSelection.add(paperBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 126, 30));
+        handSelection.add(paperBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 70, 80));
 
         rockBtn.setBackground(new java.awt.Color(51, 51, 51));
         rockBtn.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         rockBtn.setForeground(new java.awt.Color(0, 255, 255));
-        rockBtn.setText("Rock");
+        rockBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/Images/Rock.png"))); // NOI18N
         rockBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255), new java.awt.Color(0, 255, 255)));
+        rockBtn.setBorderPainted(false);
+        rockBtn.setContentAreaFilled(false);
+        rockBtn.setDefaultCapable(false);
+        rockBtn.setFocusPainted(false);
         rockBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rockBtnActionPerformed(evt);
             }
         });
-        handSelection.add(rockBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 126, 30));
+        handSelection.add(rockBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 70, -1));
 
         compHandBox.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
         compHandBox.setForeground(new java.awt.Color(255, 109, 97));
@@ -272,23 +321,24 @@ public class RPS extends javax.swing.JFrame {
 
         gameUI.add(handSelection, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, 1000, 220));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/GameUI.png"))); // NOI18N
-        gameUI.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 800));
+        gameUI_img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rockpaperscissors/Images/GameUI.png"))); // NOI18N
+        gameUI.add(gameUI_img, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 800));
 
-        jPanel1.add(gameUI);
+        RPSGame.add(gameUI);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(RPSGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(RPSGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /*
@@ -361,6 +411,81 @@ public class RPS extends javax.swing.JFrame {
         updateUI();
     }//GEN-LAST:event_endGameBtnActionPerformed
 
+    private void playerSound(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerSound
+        // TODO add your handling code here:
+        String winner = rpsGame.getWinner();
+        
+        if ((winner != "") && (gameOver == true)) {
+            try {
+                if(winner.equals("You Won!")) {
+                    soundFileStr = "src/rockpaperscissors/Images/applause.wav";
+                } else if (winner.equals("You Lost!")) {
+                    soundFileStr = "src/rockpaperscissors/Images/loserSFX.wav";
+                } else {
+                    return;
+                }
+                
+                
+                File f = new File(soundFileStr);
+                audioInputStream = AudioSystem.getAudioInputStream(f);  
+                clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+                while(clip.isRunning()){}
+            } 
+            catch (Exception ex) {
+                System.out.println("Error playing sounds");
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_playerSound
+
+    private void compSounds(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_compSounds
+        // TODO add your handling code here:
+        String winner = rpsGame.getWinner();
+        
+        if ((winner != "") && (gameOver == true)) {
+            try {
+                if(winner.equals("You Lost!")) {
+                    soundFileStr = "src/rockpaperscissors/Images/applause.wav";
+                } else if (winner.equals("You Won!")) {
+                    soundFileStr = "src/rockpaperscissors/Images/loserSFX.wav";
+                } else {
+                    return;
+                }
+                
+                File f = new File(soundFileStr);
+                audioInputStream = AudioSystem.getAudioInputStream(f);  
+                clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+                while(clip.isRunning()){}
+            } 
+            catch (Exception ex) {
+                System.out.println("Error playing sounds");
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_compSounds
+
+    private void compSoundStop(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_compSoundStop
+        // TODO add your handling code here:
+        if ((clip != null) && (clip.isOpen())){
+            clip.close();
+            clip = null;
+        }
+    }//GEN-LAST:event_compSoundStop
+
+    private void playerSoundStop(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerSoundStop
+        // TODO add your handling code here:
+        if ((clip != null) && (clip.isOpen())){
+            clip.close();
+            clip = null;
+        }
+    }//GEN-LAST:event_playerSoundStop
+
     /**
      * @param args the command line arguments
      */
@@ -375,13 +500,16 @@ public class RPS extends javax.swing.JFrame {
     }
 
     public void updateUI(){
-        roundBox.setText(rpsGame.getRound());
+        roundBox.setText(rpsGame.getRoundMsg());
         playerScoreBox.setText(String.valueOf(rpsGame.getPlayerScore()));
         computerScoreBox.setText(String.valueOf(rpsGame.getComputerScore()));
         compHandBox.setText(rpsGame.getComputerHand());
         winnerBox.setText(rpsGame.getWinner());
         statusBox.setText(rpsGame.getStatusMsg());
         directionBox.setText(rpsGame.getDirectionMsg());
+        
+        setImages();
+        setColor();
         
         gameOver = rpsGame.getGameOver();
         if (gameOver == true){
@@ -393,11 +521,56 @@ public class RPS extends javax.swing.JFrame {
         }
     }
     
+    public void setImages() {
+        String winner = rpsGame.getWinner();
+        
+        ImageIcon playerStart = new ImageIcon(getClass().getResource("/rockpaperscissors/Images/RPS_Player_Start.png"));
+        ImageIcon playerWin = new ImageIcon(getClass().getResource("/rockpaperscissors/Images/RPS_Player_Win.png"));
+        ImageIcon playerLose = new ImageIcon(getClass().getResource("/rockpaperscissors/Images/RPS_Player_Lose.png"));
+        ImageIcon compStart = new ImageIcon(getClass().getResource("/rockpaperscissors/Images/RPS_Comp_Start.png"));
+        ImageIcon compWin = new ImageIcon(getClass().getResource("/rockpaperscissors/Images/RPS_Comp_Win.png"));
+        ImageIcon compLose = new ImageIcon(getClass().getResource("/rockpaperscissors/Images/RPS_Comp_Lose.png"));
+        ImageIcon playerWins = new ImageIcon(getClass().getResource("/rockpaperscissors/Images/playerWinGameUI.png"));
+        ImageIcon computerWins = new ImageIcon(getClass().getResource("/rockpaperscissors/Images/compWinGameUI.png"));
+        ImageIcon startUI = new ImageIcon(getClass().getResource("/rockpaperscissors/Images/GameUI.png"));
+        
+        if ((winner == "You") || (winner == "You Won!")) {
+            playerFace.setIcon(playerWin);
+            computerFace.setIcon(compLose);
+            gameUI_img.setIcon(playerWins);
+        } else if ((winner == "Computer") || (winner == "You Lost!")) {
+            playerFace.setIcon(playerLose);
+            computerFace.setIcon(compWin);
+            gameUI_img.setIcon(computerWins);
+        } else {
+            playerFace.setIcon(playerStart);
+            computerFace.setIcon(compStart);
+            gameUI_img.setIcon(startUI);
+        }
+        playerFace.setVisible(true);
+        computerFace.setVisible(true);
+    }
+    
+    public void setColor() {
+        String winner = rpsGame.getWinner();
+        
+        if ((winner == "You") || (winner == "You Won!")) {
+            winnerBox.setForeground(new Color(0, 255, 255));
+        } else if ((winner == "Computer") || (winner == "You Lost!")) {
+            winnerBox.setForeground(new Color(255, 109, 97));
+        } else {
+            winnerBox.setForeground(new Color(51, 204, 0));
+        }
+    }
+    
     public void toggleGameActive(boolean state){
         gameUI.setVisible(state);
         gameStatus.setVisible(state);
+        endGameBtn.setVisible(state);
+        endGameBtn.setEnabled(state);
+        endGameBtn.setOpaque(state);
+        handSelection.setVisible(state);
     }
-    
     
     public void toggleMainMenu(boolean state){
         // Changes to the specified state
@@ -409,6 +582,20 @@ public class RPS extends javax.swing.JFrame {
     }
     
     public void toggleGameOver(boolean state) {
+        String winner = rpsGame.getWinner();
+        
+        ImageIcon playerWins = new ImageIcon(getClass().getResource("/rockpaperscissors/Images/playerWinGameUI.png"));
+        ImageIcon computerWins = new ImageIcon(getClass().getResource("/rockpaperscissors/Images/compWinGameUI.png"));
+        ImageIcon startUI = new ImageIcon(getClass().getResource("/rockpaperscissors/Images/GameUI.png"));
+        
+        if (winner == "You Won!") {
+            gameUI_img.setIcon(playerWins);
+        } else if (winner == "You Lost!") {
+            gameUI_img.setIcon(computerWins);
+        } else {
+            gameUI_img.setIcon(startUI);
+        }
+        
         playAgain.setVisible(state);
         playAgain.setEnabled(state);
         playAgain.setOpaque(state);
@@ -429,8 +616,12 @@ public class RPS extends javax.swing.JFrame {
     boolean disable = false;
     boolean enable = true;
     String hand;
+    Clip clip;
+    AudioInputStream audioInputStream;
+    String soundFileStr;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel RPSGame;
     private javax.swing.JLabel compHandBox;
     private javax.swing.JLabel computerFace;
     private javax.swing.JLabel computerScoreBox;
@@ -438,10 +629,9 @@ public class RPS extends javax.swing.JFrame {
     private javax.swing.JButton endGameBtn;
     private javax.swing.JPanel gameStatus;
     private javax.swing.JPanel gameUI;
+    private javax.swing.JLabel gameUI_img;
     private javax.swing.JPanel handSelection;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainMenu;
     private javax.swing.JButton mmBtn;
     private javax.swing.JButton paperBtn;
